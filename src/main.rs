@@ -3,7 +3,9 @@
 use dioxus::prelude::*;
 use dioxus_desktop::{Config, WindowBuilder};
 
+pub mod army;
 pub mod army_composer;
+
 use army_composer::ArmyComposer;
 
 fn main() {
