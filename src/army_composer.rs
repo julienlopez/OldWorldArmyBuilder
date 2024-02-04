@@ -12,6 +12,7 @@ pub fn ArmyComposer(cx: Scope) -> Element {
 fn Header(cx: Scope) -> Element {
     cx.render(rsx! {
         div {
+            style: "text-align: center;",
             "Header",
         }
     })
@@ -20,7 +21,16 @@ fn Header(cx: Scope) -> Element {
 fn Body(cx: Scope) -> Element {
     cx.render(rsx! {
         div {
-            "body",
+            style: "columns: 3",
+            div {
+                "Column1",
+            }
+            div {
+                "Column2",
+            }
+            div {
+                "Column3",
+            }
         }
     })
 }
