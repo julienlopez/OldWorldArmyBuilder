@@ -18,8 +18,6 @@ fn main() {
 }
 
 fn App(cx: Scope) -> Element {
-    let popup_visible = use_state(cx, || true);
-    dbg!(popup_visible);
     cx.render(rsx! {
         main {
             style { include_str!("./style.css") }
