@@ -21,21 +21,22 @@ fn Header(cx: Scope) -> Element {
 }
 
 fn Body(cx: Scope) -> Element {
-    let armies = use_state(cx, || Vec::<Army>::new());
-    render! {
+    let armies = use_ref(cx, || Vec::<Army>::new());
+    cx.render(rsx!(
         div {
             div {
                 width: "33%",
                 display: "inline-block",
-                "Column1"
-                // for army in &armies {
-                //     div {
-                //         "Army : ",
-                //         &army.name
-                //     }
-                // }
+                "Column1",
+                for army in &*armies.read() {
+                    div {
+                        "Army : ",
+                        army.name.clone()
+                    }
+                }
                 button {
                     class: "button",
+                    onclick: |_| { armies.write().push(Army{name: "First Army".to_string(), points: 1000, faction: "Tomb Kings of Khemri".to_string()})},
                     "New Army"
                 }
             }
@@ -50,5 +51,5 @@ fn Body(cx: Scope) -> Element {
                 "Column3",
             }
         }
-    }
+    ))
 }
