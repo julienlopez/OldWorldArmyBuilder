@@ -50,3 +50,8 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+/** not working? */
+input[type=submit] {
+    cursor: pointer;
+}
