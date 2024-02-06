@@ -3,6 +3,7 @@
 use dioxus::prelude::*;
 
 use crate::army::Army;
+use crate::new_army_popup::NewArmyPopup;
 
 pub fn ArmyComposer(cx: Scope) -> Element {
     cx.render(rsx! {
@@ -18,61 +19,6 @@ fn Header(cx: Scope) -> Element {
             "Header",
         }
     })
-}
-
-#[derive(PartialEq, Props)]
-struct ArmyCreationPopupProps {
-    is_visible: UseState<bool>,
-    armies: UseRef<Vec<Army>>,
-}
-
-fn ArmyCreationPopup(cx: Scope<ArmyCreationPopupProps>) -> Element {
-    return cx.render(rsx! {
-        div {
-            class: "popup_background",
-            div {
-                class: "popup_container",
-                width: "60%",
-                style: "text-align: center;",
-                span {
-                    class : "close",
-                    onclick: |_| {cx.props.is_visible.set(false);},
-                    "X"
-                }
-                form {
-                    "Army Name : "
-                    input {
-
-                    }
-                    br {}
-                    "Army List : "
-                    input {
-
-                    }
-                    br {}
-                    "Points : "
-                    input {
-
-                    }
-                    button {
-                        class: "button",
-                        margin: "auto",
-                        prevent_default: "onclick",
-                        onclick: |event| {
-                            cx.props.armies.write().push(
-                                Army{
-                                    name: "First Army".to_string(),
-                                    points: 1000,
-                                    faction: "Tomb Kings of Khemri".to_string()
-                                });
-                            cx.props.is_visible.set(false);
-                        },
-                        "Ok"
-                    }
-                }
-            }
-        }
-    });
 }
 
 fn Body(cx: Scope) -> Element {
@@ -110,7 +56,7 @@ fn Body(cx: Scope) -> Element {
             },
             if *army_creation_popup.get() {
                 cx.render(rsx!(
-                    ArmyCreationPopup {
+                    NewArmyPopup {
                         is_visible: army_creation_popup.clone(),
                         armies: armies.clone(),
                     }

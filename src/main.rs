@@ -5,6 +5,7 @@ use dioxus_desktop::{Config, WindowBuilder};
 
 pub mod army;
 pub mod army_composer;
+mod new_army_popup;
 
 use army_composer::ArmyComposer;
 
